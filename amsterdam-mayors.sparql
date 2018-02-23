@@ -6,8 +6,10 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
 
-SELECT ?person ?start ?eind ?geb ?sterf
+SELECT ?person ?personLabel ?start ?eind ?geb ?sterf
 WHERE 
 {
   ?person p:P39 ?bn .
@@ -16,6 +18,7 @@ WHERE
   OPTIONAL { ?bn pq:P582 ?eind . }
   ?person wdt:P569 ?geb .
   OPTIONAL {?person wdt:P570 ?sterf .}
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
 ORDER BY ?start ?sterf
 LIMIT 200
